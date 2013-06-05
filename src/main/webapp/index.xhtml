@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>Bill Payment Options</title>
+</h:head>
+
+<h:body>
+	<h3>Bill Payment Options</h3>
+	<p>
+		Type an amount, select Debit Card or Credit Card, then click Pay.
+	</p>
+	
+	<h:form>
+		<p>
+			<h:outputLabel value="Amount: $" for="amt" />
+			<h:inputText id="amt" value="#{paymentBean.value}"
+				required="true"
+				requiredMessage="An amount is required."
+				maxlength="15" />
+		</p>
+		
+		<h:outputLabel value="Options: " for="opt" />
+		<h:selectOneRadio id="opt" value="#{paymentBean.paymentOption}">
+			<f:selectItem id="debit" itemLabel="Debit Card" itemValue="1" />
+			<f:selectItem id="credit" itemLabel="Credit Card" itemValue="2" />
+		</h:selectOneRadio>
+		
+		<p>
+			<h:commandButton id="submit" value="Pay" action="#{paymentBean.pay}" />
+		</p>
+		<p>
+			<h:commandButton id="reset" immediate="true" value="Reset" action="#{paymentBean.reset}" />
+		</p>
+	</h:form>
+	
+	<div class="messagecolor">
+		<h:messages showSummary="true" showDetali="false"
+			errorStyle="color: #d20005;" infoStyle="color: blue;" />
+	</div>
+</h:body>
+
+</html>
